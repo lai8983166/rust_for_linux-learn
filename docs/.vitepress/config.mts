@@ -24,6 +24,7 @@ export default withMermaid(
       nav: [
         { text: '开始', link: '/intro/why-rust' },
         { text: '原理篇', link: '/principles/safety-philosophy' },
+        { text: '实战篇', link: '/practice/overview' },
         { text: '附录', link: '/appendix/c-rust-mapping' },
         {
           text: '官方文档',
@@ -55,6 +56,18 @@ export default withMermaid(
             { text: '同步原语的 RAII 封装', link: '/principles/synchronization' },
             { text: '设备模型与驱动抽象', link: '/principles/device-model' },
             { text: '构建系统：Kbuild 与 bindgen', link: '/principles/build-system' },
+          ],
+        },
+        {
+          text: '实战篇',
+          collapsed: false,
+          items: [
+            { text: '导览：我们要造什么', link: '/practice/overview' },
+            { text: 'P2：第一个模块', link: '/practice/first-module' },
+            { text: 'P3：misc 字符设备', link: '/practice/misc-device' },
+            { text: 'P4：状态与并发', link: '/practice/state-and-sync' },
+            { text: 'P5：ioctl 与用户内存', link: '/practice/ioctl-uaccess' },
+            { text: 'P6：调试与收尾', link: '/practice/debug-wrapup' },
           ],
         },
         {
