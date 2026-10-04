@@ -1,18 +1,23 @@
 <script setup lang="ts">
-defineProps<{
-  /** 验证过的内核版本，如 "6.12" */
-  kernel?: string
-  /** 验证过的 rustc 版本，如 "1.85" */
-  rustc?: string
-  /** 验证日期，如 "2026-10" */
-  date?: string
-}>()
+withDefaults(
+  defineProps<{
+    /** 徽章标签文字，默认"已验证"，可传"本文锚定"等 */
+    label?: string
+    /** 内核版本，如 "6.12" */
+    kernel?: string
+    /** rustc 版本，如 "1.85" */
+    rustc?: string
+    /** 日期，如 "2026-10" */
+    date?: string
+  }>(),
+  { label: '已验证' },
+)
 </script>
 
 <template>
   <p class="version-badge">
     <span class="vb-check">✓</span>
-    <span class="vb-label">已验证</span>
+    <span class="vb-label">{{ label }}</span>
     <span v-if="kernel" class="vb-item">kernel {{ kernel }}</span>
     <span v-if="rustc" class="vb-item">rustc {{ rustc }}</span>
     <span v-if="date" class="vb-item">{{ date }}</span>
