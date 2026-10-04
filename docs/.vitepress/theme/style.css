@@ -1,0 +1,10 @@
+/* mermaid 图表：居中且不超出内容区 */
+.mermaid {
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
