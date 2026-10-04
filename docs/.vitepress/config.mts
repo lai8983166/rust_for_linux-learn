@@ -8,9 +8,17 @@ export default withMermaid(
     description:
       '深入解读 Linux 内核中的 Rust 支持：安全抽象的哲学、kernel crate 架构、pinning 与就地初始化、错误处理与内存分配、构建系统与 C 互操作。',
     lastUpdated: true,
+    head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }]],
     mermaid: {
       // 亮色主题；暗色模式由插件随站点外观自动切换
       theme: 'default',
+    },
+    vite: {
+      optimizeDeps: {
+        // mermaid 的依赖 fastdom 是 UMD 包，不预打包的话 dev 模式下
+        // 浏览器按 ESM 导入会报 "does not provide an export named 'default'"
+        include: ['mermaid', 'fastdom'],
+      },
     },
     themeConfig: {
       nav: [
