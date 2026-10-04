@@ -57,7 +57,7 @@ flowchart TB
     C["C 内核源码与 UAPI 头"]
 
     DRV --> K
-    DRV -.->|"偶尔显式使用"| BIND
+    DRV -.->|"FORBIDDEN（官方架构图口径）"| BIND
     K --> BIND
     K --> MACROS
     K --> PININIT
@@ -96,7 +96,7 @@ flowchart TB
 
 - `bindings` 的生成由构建系统控制（allowlist 决定哪些头文件、哪些符号进入），第十一章讲 Kbuild 时会展开；
 - `kernel` crate 里对 bindings 的每一次调用都裹在 unsafe 中并配 SAFETY 注释——上一章的分纪律在这里落实为代码密度；
-- 驱动代码与 `bindings` 之间的虚线是"允许但不应常态"：`kernel::bindings` 是公开的，遇到抽象缺口时驱动作者可以临时直连 C（并自负 unsafe），同时这通常意味着该给抽象层提 patch 了。
+- 驱动代码与 `bindings` 之间只有虚线，这不是省略：官方文档（`Documentation/rust/general-information.rst`）的架构图把驱动直连 C 标为 **FORBIDDEN**。`kernel::bindings` 虽是公开 crate，但绕过抽象层直连需要极其充分的理由并自负 unsafe——遇到抽象缺口，正解是给抽象层提 patch。
 
 这套结构也解释了评审责任的划分：`bindings` 由工具保证正确性；`kernel` crate 的每处 unsafe 由 Rust-for-Linux 维护者与相关子系统维护者共同把关；驱动代码则回归普通 Rust 的评审强度。
 
